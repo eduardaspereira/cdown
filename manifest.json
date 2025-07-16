@@ -1,6 +1,6 @@
 {
-    "name": "The Legendary Slap Bet Countdown",
-    "short_name": "SlapBet",
+    "name": "The Legendary Slap Countdown",
+    "short_name": "SlapCount",
     "start_url": "./",
     "display": "standalone",
     "background_color": "#1e3c72",
