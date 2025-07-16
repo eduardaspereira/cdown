@@ -4,7 +4,9 @@ function updateCountdown() {
     const diff = end - now;
 
     if (diff <= 0) {
-        document.getElementById('timer').textContent = 'Happy New Year!';
+        document.getElementById('timer').innerHTML = '🎉 SLAP TIME! 🎉<br><span style="font-size: 0.6em;">The moment has arrived!</span>';
+        document.querySelector('.slap-emoji').style.animation = 'none';
+        document.querySelector('.slap-emoji').innerHTML = '💥';
         return;
     }
 
@@ -13,9 +15,18 @@ function updateCountdown() {
     const minutes = Math.floor((diff / (1000 * 60)) % 60);
     const seconds = Math.floor((diff / 1000) % 60);
 
-    document.getElementById('timer').textContent =
-        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    document.getElementById('timer').innerHTML = 
+        `<span style="color: #FFD700;">${days}</span> days<br>` +
+        `<span style="color: #FF6B6B;">${hours}</span> hours<br>` +
+        `<span style="color: #4ECDC4;">${minutes}</span> minutes<br>` +
+        `<span style="color: #45B7D1;">${seconds}</span> seconds`;
 }
 
 setInterval(updateCountdown, 1000);
 updateCountdown();
+
+
+
+
+
+
