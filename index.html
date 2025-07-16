@@ -3,80 +3,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Slap Countdown</title>
+    <title>The Ultimate Slap Bet Timer</title>
     <link rel="manifest" href="./manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            font-family: 'Montserrat', sans-serif;
+            /* background: radial-gradient(circle at center, #2e0000, #000000);
+            color: #ff2e2e;  */
+            /* more aggressive red */
             text-align: center;
             padding: 50px 20px;
             min-height: 100vh;
             margin: 0;
-            display: flex;
+            display: flex;          
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            animation: pulseBackground 10s ease-in-out infinite;
+            background-size: 150% 150%;
+            transition: background 1s ease-in-out;
+        }
+
+            /* Darker, more unstable background animationa */
+            @keyframes pulseBackground {
+                0% {
+                    background: radial-gradient(circle at center, #2e0000, #000000);
+                }
+                50% {
+                    background: radial-gradient(circle at center, #5a0000, #0a0a0a);
+                }
+                100% {
+                    background: radial-gradient(circle at center, #2e0000, #000000);
+                }
+            }
+
+        
+        .floating-threats {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .floating-threat {
+            position: absolute;
+            color: #ff6b6b;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            animation: floatingPop 4s ease-in-out infinite;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        
+        .floating-threat:nth-child(1) { animation-delay: 0s; }
+        .floating-threat:nth-child(2) { animation-delay: 0.5s; }
+        .floating-threat:nth-child(3) { animation-delay: 1s; }
+        .floating-threat:nth-child(4) { animation-delay: 1.5s; }
+        .floating-threat:nth-child(5) { animation-delay: 2s; }
+        .floating-threat:nth-child(6) { animation-delay: 2.5s; }
+        .floating-threat:nth-child(7) { animation-delay: 3s; }
+        .floating-threat:nth-child(8) { animation-delay: 3.5s; }
+        .floating-threat:nth-child(9) { animation-delay: 4s; }
+        .floating-threat:nth-child(10) { animation-delay: 4.5s; }
+        .floating-threat:nth-child(11) { animation-delay: 5s; }
+        .floating-threat:nth-child(12) { animation-delay: 5.5s; }
+        .floating-threat:nth-child(13) { animation-delay: 6s; }
+        .floating-threat:nth-child(14) { animation-delay: 6.5s; }
+        .floating-threat:nth-child(15) { animation-delay: 7s; }
+        .floating-threat:nth-child(16) { animation-delay: 7.5s; }
+        .floating-threat:nth-child(17) { animation-delay: 8s; }
+        .floating-threat:nth-child(18) { animation-delay: 8.5s; }
+        .floating-threat:nth-child(19) { animation-delay: 9s; }
+        .floating-threat:nth-child(20) { animation-delay: 9.5s; }
+        
+        @keyframes floatingPop {
+            0% { 
+                opacity: 0; 
+                transform: scale(0.8) translateY(20px); 
+            }
+            20% { 
+                opacity: 1; 
+                transform: scale(1.1) translateY(-10px); 
+            }
+            40% { 
+                opacity: 0.9; 
+                transform: scale(1) translateY(0); 
+            }
+            80% { 
+                opacity: 0.7; 
+                transform: scale(0.95) translateY(5px); 
+            }
+            100% { 
+                opacity: 0; 
+                transform: scale(0.8) translateY(20px); 
+            }
         }
         
         .slap-container {
-            background: rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 40px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
             max-width: 600px;
             width: 100%;
+            border: 2px solid #f9d423;
         }
         
         h1 {
-            font-size: 3em;
+            font-family: 'Bebas Neue', cursive;
+            font-size: 4em;
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             animation: glow 2s ease-in-out infinite alternate;
+            letter-spacing: 2px;
+            color: #ffffff;
+            text-transform: uppercase;
         }
         
         @keyframes glow {
-            from { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.3); }
-            to { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 255, 255, 0.5); }
+            from { text-shadow: 0 0 10px #f9d423, 0 0 20px #f9d423; }
+            to { text-shadow: 0 0 15px #f9d423, 0 0 30px #f9d423; }
         }
         
         #timer {
-            font-size: 2.5em;
+            font-size: 2em;
+            text-shadow: 0 0 10px #ff0000, 0 0 20px #990000;
             font-weight: bold;
             margin: 30px 0;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 15px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            border: 2px solid #f9d423;
+        }
+        
+        .floating-threat {
+            position: absolute;
+            font-size: 1rem;
+            color: #ff4d4d;
+            text-shadow: 1px 1px 4px black;
+            animation: floatThreat 6s ease-in-out infinite alternate;
+            pointer-events: none;
+            font-weight: bold;
+        }
+
+        @keyframes floatThreat {
+            0% { transform: translateY(0); opacity: 0.9; }
+            100% { transform: translateY(-10px); opacity: 1; }
         }
         
         .slap-emoji {
-            font-size: 4em;
+            font-size: 5em;
             margin: 20px 0;
-            animation: bounce 1s infinite;
+            animation: slap 1.5s infinite;
+            filter: drop-shadow(0 0 10px rgba(249, 212, 35, 0.7));
         }
         
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
+        @keyframes slap {
+            0% { transform: translateX(0) rotate(0deg); }
+            30% { transform: translateX(-30px) rotate(-20deg); }
+            40% { transform: translateX(5px) rotate(5deg); }
+            50% { transform: translateX(0) rotate(0deg); }
+            100% { transform: translateX(0) rotate(0deg); }
         }
         
         .subtitle {
-            font-size: 1.2em;
-            opacity: 0.8;
+            font-size: 1.3em;
             margin-bottom: 20px;
+            font-style: italic;
+            color: #f9d423;
+        }
+        
+        .slap-threats {
+            background: rgba(255, 107, 107, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px solid #ff6b6b;
+        }
+        
+        .threat {
+            font-size: 1.1em;
+            font-style: italic;
+            color: #ff6b6b;
+            margin: 10px 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            animation: threatPulse 3s ease-in-out infinite;
+        }
+        
+        .threat:nth-child(2) { animation-delay: 0.5s; }
+        .threat:nth-child(3) { animation-delay: 1s; }
+        .threat:nth-child(4) { animation-delay: 1.5s; }
+        .threat:nth-child(5) { animation-delay: 2s; }
+        
+        @keyframes threatPulse {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+        
+        .slap-rules {
+            background: rgba(249, 212, 35, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 0.9em;
+            border-left: 3px solid #f9d423;
+            text-align: left;
         }
     </style>
 </head>
 <body>
+    <div class="floating-threats">
+        <div class="floating-threat" style="top: 10%; left: 5%;">"I'm gonna catch you..."</div>
+        <div class="floating-threat" style="top: 20%; right: 10%;">"My hand is going to slap your face!"</div>
+        <div class="floating-threat" style="top: 70%; left: 8%;">"You can run, but you can't hide!"</div>
+        <div class="floating-threat" style="top: 80%; right: 15%;">"The slap is coming for you!"</div>
+        <div class="floating-threat" style="top: 40%; left: 2%;">"Justice will be served!"</div>
+        <div class="floating-threat" style="top: 60%; right: 5%;">"That's what you get!"</div>
+        <div class="floating-threat" style="top: 30%; left: 12%;">"Prepare for impact!"</div>
+        <div class="floating-threat" style="top: 85%; left: 20%;">"The countdown ends with pain!"</div>
+        <div class="floating-threat" style="top: 15%; right: 25%;">"No mercy!"</div>
+        <div class="floating-threat" style="top: 50%; right: 2%;">"Slap incoming!"</div>
+        <div class="floating-threat" style="top: 5%; left: 30%;">"You thought you were safe?"</div>
+        <div class="floating-threat" style="top: 25%; right: 5%;">"Time's up, face the slap!"</div>
+        <div class="floating-threat" style="top: 45%; left: 18%;">"Nowhere to run now!"</div>
+        <div class="floating-threat" style="top: 75%; right: 12%;">"Regret comes too late!"</div>
+        <div class="floating-threat" style="top: 35%; left: 22%;">"You earned this!"</div>
+        <div class="floating-threat" style="top: 65%; right: 20%;">"Tick... Tock... BAM!"</div>
+        <div class="floating-threat" style="top: 10%; right: 35%;">"The palm of justice awaits!"</div>
+        <div class="floating-threat" style="top: 55%; left: 10%;">"You've been warned!"</div>
+        <div class="floating-threat" style="top: 90%; right: 8%;">"SLAP mode activated!"</div>
+        <div class="floating-threat" style="top: 20%; left: 40%;">"Your destiny is a red cheek!"</div>
+    </div>
+
     <div class="slap-container">
-        <h1>🖐️ THE SLAP COUNTDOWN 🖐️</h1>
-        <p class="subtitle">Time until the legendary slap...</p>
+        <h1>🖐️ SLAP BET COUNTDOWN 🖐️</h1>
+        <p class="subtitle">When the timer hits zero... SLAP!</p>
         <div class="slap-emoji">👋</div>
         <p id="timer"></p>
+        <div class="slap-threats">
+            <p class="threat">"I'm gonna catch you..."</p>
+            <p class="threat">"My hand is going to slap your face!"</p>
+            <p class="threat">"You can run, but you can't hide!"</p>
+            <p class="threat">"The slap is coming for you!"</p>
+            <p class="threat">"Justice will be served... with a slap!"</p>
+        </div>
+        <div class="slap-rules">
+            <p><strong>Official Slap Bet Rules:</strong></p>
+            <p>1. Must be delivered with full force</p>
+            <p>2. No blocking or dodging allowed</p>
+            <p>3. The slap debt cannot be forgiven</p>
+            <p>4. Timing is everything - no early slaps!</p>
+            <p>5. <em>"That's what you get!"</em></p>
+        </div>
     </div>
 
     <script src="./script.js"></script>
@@ -88,3 +274,20 @@
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
