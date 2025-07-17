@@ -227,6 +227,94 @@
             border-left: 3px solid #f9d423;
             text-align: left;
         }
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        
+        #themeToggle {
+            background: linear-gradient(45deg, #f9d423, #ff6b6b);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        #themeToggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* Summer theme styles */
+        body.summer-theme {
+            background: linear-gradient(135deg, #74b9ff, #0984e3, #00b894, #00cec9);
+            background-size: 400% 400%;
+            animation: summerGradient 8s ease infinite;
+        }
+        
+        @keyframes summerGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        body.summer-theme .floating-threats {
+            display: none;
+        }
+        
+        body.summer-theme .slap-container {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #00cec9;
+            color: #2d3436;
+        }
+        
+        body.summer-theme h1 {
+            color: #0984e3;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        body.summer-theme .subtitle {
+            color: #00b894;
+        }
+        
+        body.summer-theme #timer {
+            color: #2d3436;
+            text-shadow: none;
+            border: 2px solid #00cec9;
+            background: rgba(116, 185, 255, 0.1);
+        }
+        
+        body.summer-theme .slap-emoji {
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(0, 206, 201, 0.5));
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        body.summer-theme .slap-threats {
+            background: rgba(0, 184, 148, 0.1);
+            border: 2px solid #00b894;
+            display: none;
+        }
+        
+        body.summer-theme .slap-rules {
+            background: rgba(116, 185, 255, 0.1);
+            border-left: 3px solid #74b9ff;
+            display: none;
+        }
+        
+        body.summer-theme #themeToggle {
+            background: linear-gradient(45deg, #ff6b6b, #f9d423);
+        }
     </style>
 </head>
 <body>
@@ -275,8 +363,31 @@
         </div>
     </div>
 
+    <div class="theme-toggle">
+        <button id="themeToggle">🌞 Switch to Summer Vibes</button>
+    </div>
+
     <script src="./script.js"></script>
     <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('summer-theme');
+            if (body.classList.contains('summer-theme')) {
+                themeToggle.textContent = '🖐️ Back to Slap Mode';
+                document.querySelector('h1').textContent = '🏡 HOMETOWN COUNTDOWN 🏡';
+                document.querySelector('.subtitle').textContent = 'Coming home soon...';
+                document.querySelector('.slap-emoji').textContent = '✈️';
+            } else {
+                themeToggle.textContent = '🌞 Switch to Summer Vibes';
+                document.querySelector('h1').innerHTML = '🖐️ SLAP COUNTDOWN 🖐️';
+                document.querySelector('.subtitle').textContent = 'When the timer hits zero... SLAP!';
+                document.querySelector('.slap-emoji').textContent = '👋';
+            }
+        });
+
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('./service-worker.js')
                 .then(() => console.log('Service Worker registered.'));
@@ -284,22 +395,6 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
